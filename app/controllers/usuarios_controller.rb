@@ -31,7 +31,7 @@ class UsuariosController < ApplicationController
     @usuario = Usuario.new(user_params)
    if @usuario.save
     response = { message: 'usuario creado successfully'}
-    render json: response, status: :created 
+    render json: {status: 200, message: "Usuario creado exitosamente!"},  status: :created 
    else
     ap "error "
     ap @usuario.errors.messages
