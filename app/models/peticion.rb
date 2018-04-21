@@ -8,21 +8,22 @@ class Peticion < ApplicationRecord
 
   def self.listar(*args)
 
-    p "Args recupedos #{args}"
-    options = args.extract_options!
-    p "optiones recuperadas #{options}"
+    
+    options = args.extract_options! 
     listado = self.all 
 
     ap options[:tipo]
-    ap options[:tipo] == 'solicitudes'
+    ap "Usuario #{options[:usuario_id]}"
+    
     if options[:tipo].present? 
       listado=listado.where(estado_id: 1) if options[:tipo] == 'totalpendientes'
       
-      if options[:tipo] == 'peticiones' 
+      if options[:tipo] == 'solicitudes' 
+        ap "Solicitudes"
         listado=listado.where(estado_id: 1).joins(:intercesors).where(intercesors: {usuario_id: options[:usuario_id]})
       end
      
-      listado=listado.where(usuario_id: options[:usuario_id]) if options[:usuario_id].present? &&  options[:tipo] == 'solicitudes'
+      listado=listado.where(usuario_id: options[:usuario_id]).where('estado_id in (1,2)') if options[:usuario_id].present? &&  options[:tipo] == 'peticiones'
     end
     
     resultado = []

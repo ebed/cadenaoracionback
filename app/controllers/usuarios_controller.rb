@@ -33,6 +33,8 @@ class UsuariosController < ApplicationController
     response = { message: 'usuario creado successfully'}
     render json: response, status: :created 
    else
+    ap "error "
+    ap @usuario.errors.messages
     render json: @usuario.errors, status: :bad
    end 
   end
@@ -46,6 +48,16 @@ class UsuariosController < ApplicationController
 
   def user_params
     params.permit(
+      :nombre,
+      :apellido,
+      :username,
+      :email,
+      :password
+    )
+  end
+
+  def usuario_params
+    params.require(:usuario).permit(
       :nombre,
       :apellido,
       :username,
