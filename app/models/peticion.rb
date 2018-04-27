@@ -3,6 +3,7 @@ class Peticion < ApplicationRecord
   belongs_to :tipo
   belongs_to :usuario
   has_many :intercesors 
+  has_many :mensajes
 
 
 

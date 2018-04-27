@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180420182640) do
+ActiveRecord::Schema.define(version: 20180425023637) do
 
   create_table "estados", force: :cascade do |t|
     t.string "nombre"
@@ -21,6 +21,15 @@ ActiveRecord::Schema.define(version: 20180420182640) do
   create_table "intercesors", force: :cascade do |t|
     t.integer "peticion_id"
     t.integer "usuario_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "mensajes", force: :cascade do |t|
+    t.integer "peticion_id"
+    t.integer "usuario_id"
+    t.string "encabezado"
+    t.string "contenido"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

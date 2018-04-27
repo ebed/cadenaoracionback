@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  peticion_id: 1
+  usuario_id: 1
+  encabezado: MyString
+  contenido: MyString
+
+two:
+  peticion_id: 1
+  usuario_id: 1
+  encabezado: MyString
+  contenido: MyString

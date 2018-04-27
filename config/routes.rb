@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resource :tipos
   resource :usuarios
   resource :interceder
+  resource :mensajeria
 
   post 'auth/register', to: 'usuarios#register'
   post 'auth/login', to: 'usuarios#login'
