@@ -10,12 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180425023637) do
+ActiveRecord::Schema.define(version: 20180524022713) do
 
   create_table "estados", force: :cascade do |t|
     t.string "nombre"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "images", force: :cascade do |t|
+    t.integer "usuario_id"
+    t.string "style"
+    t.binary "file_contents"
   end
 
   create_table "intercesors", force: :cascade do |t|
@@ -58,6 +64,11 @@ ActiveRecord::Schema.define(version: 20180425023637) do
     t.string "apellido"
     t.string "username"
     t.string "email"
+    t.string "image_file_name"
+    t.string "image_content_type"
+    t.integer "image_file_size"
+    t.datetime "image_updated_at"
+    t.string "avatar"
   end
 
 end

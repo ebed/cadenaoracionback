@@ -20,6 +20,22 @@ class UsuariosController < ApplicationController
 
   end
 
+  def changeavatar
+    ap "Cambiando imagen"
+    usuario=Usuario.find(params[:usuario]) 
+   # usuario.image = params[:image]  
+    result = Cloudinary::Uploader.upload(params[:image], upload_preset: 'kmaftbcj')
+    ap result["url"]
+    usuario.avatar = result["url"]
+
+    if usuario.save
+     render json: {status: 200, resultado: usuario}
+    else
+      render json: {status: 500, mensajes: usuario.errors}
+    end
+    
+  end
+
 
   def create
 
@@ -52,7 +68,8 @@ class UsuariosController < ApplicationController
       :apellido,
       :username,
       :email,
-      :password
+      :password,
+      :image
     )
   end
 
@@ -62,7 +79,8 @@ class UsuariosController < ApplicationController
       :apellido,
       :username,
       :email,
-      :password
+      :password,
+      :image
     )
   end
 

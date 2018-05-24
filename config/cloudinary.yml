@@ -1,0 +1,19 @@
+
+development:
+  cloud_name: hsdu58ydm
+  api_key: '135649916255569'
+  api_secret: YZXAszzJdo-jT4gxwI8Z08wOj_0
+  enhance_image_tag: true
+  static_image_support: false
+production:
+  cloud_name: hsdu58ydm
+  api_key: '135649916255569'
+  api_secret: YZXAszzJdo-jT4gxwI8Z08wOj_0
+  enhance_image_tag: true
+  static_image_support: true
+test:
+  cloud_name: hsdu58ydm
+  api_key: '135649916255569'
+  api_secret: YZXAszzJdo-jT4gxwI8Z08wOj_0
+  enhance_image_tag: true
+  static_image_support: false

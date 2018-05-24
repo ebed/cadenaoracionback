@@ -34,6 +34,7 @@ class Peticion < ApplicationRecord
         titulo: peticion.titulo,
         descripcion: peticion.descripcion,
         usuario: peticion.usuario.nombre,
+        avatar: peticion.usuario.avatar,
         estado: peticion.estado.nombre,
         tipo: peticion.tipo.nombre,
         fechacreacion: peticion.created_at

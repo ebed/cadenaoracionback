@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resource :mensajeria
 
   post 'auth/register', to: 'usuarios#register'
+  post 'usuarios/changeavatar', to: 'usuarios#changeavatar'
   post 'auth/login', to: 'usuarios#login'
   post 'peticiones/cancela', to: 'peticiones#cancela'
   post 'peticiones/finaliza', to: 'peticiones#finaliza'
