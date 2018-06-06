@@ -19,8 +19,11 @@ class Peticion < ApplicationRecord
     if options[:tipo].present? 
       if options[:tipo] == 'totalpendientes'
         listado=listado.where(estado_id: 1)
-        peticiones_id=Intercesor.where(usuario_id: options[:usuario_id]).pluck(:id)
-        listado.where.not(id: peticiones_id)
+        peticiones_id=Intercesor.where(usuario_id: options[:usuario_id]).pluck(:peticion_id)
+        ap peticiones_id
+        ap listado.count
+        listado = listado.where.not(id: peticiones_id, usuario_id: options[:usuario_id])
+        ap listado.count
       end
 
       
@@ -41,7 +44,7 @@ class Peticion < ApplicationRecord
         usuario: peticion.usuario.nombre,
         avatar: peticion.usuario.avatar,
         estado: peticion.estado.nombre,
-        tipo: peticion.tipo.nombre,
+        tipo: peticion.tipo.nombre, 
         fechacreacion: peticion.created_at
       }
       resultado.push pet
