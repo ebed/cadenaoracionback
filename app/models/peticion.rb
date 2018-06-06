@@ -17,7 +17,12 @@ class Peticion < ApplicationRecord
     ap "Usuario #{options[:usuario_id]}"
     
     if options[:tipo].present? 
-      listado=listado.where(estado_id: 1) if options[:tipo] == 'totalpendientes'
+      if options[:tipo] == 'totalpendientes'
+        listado=listado.where(estado_id: 1)
+        peticiones_id=Intercesor.where(usuario_id: options[:usuario_id]).pluck(:id)
+        listado.where.not(id: peticiones_id)
+      end
+
       
       if options[:tipo] == 'solicitudes' 
         ap "Solicitudes"

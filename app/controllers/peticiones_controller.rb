@@ -4,7 +4,7 @@ class PeticionesController < ApplicationController
     resultado = Peticion.listar(usuario_id: params[:usuario_id], tipo: params[:tipo])
     render json: resultado
   end
-
+ 
   def create
     p "llamando a creacion"
     p params
