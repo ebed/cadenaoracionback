@@ -20,19 +20,18 @@ class Peticion < ApplicationRecord
       if options[:tipo] == 'totalpendientes'
         listado=listado.where(estado_id: 1)
         peticiones_id=Intercesor.where(usuario_id: options[:usuario_id]).pluck(:peticion_id)
-        ap peticiones_id
-        ap listado.count
-        listado = listado.where.not(id: peticiones_id, usuario_id: options[:usuario_id])
-        ap listado.count
+  
+        listado = listado.where.not(id: peticiones_id, usuario_id: options[:usuario_id]).order(created_at: :desc)
+       
       end
 
       
       if options[:tipo] == 'solicitudes' 
         ap "Solicitudes"
-        listado=listado.where(estado_id: 1).joins(:intercesors).where(intercesors: {usuario_id: options[:usuario_id]})
+        listado=listado.where(estado_id: 1).joins(:intercesors).where(intercesors: {usuario_id: options[:usuario_id]}).order(created_at: :desc)
       end
      
-      listado=listado.where(usuario_id: options[:usuario_id]).where('estado_id in (1)') if options[:usuario_id].present? &&  options[:tipo] == 'peticiones'
+      listado=listado.where(usuario_id: options[:usuario_id]).where('estado_id in (1)').order(created_at: :desc) if options[:usuario_id].present? &&  options[:tipo] == 'peticiones'
     end
     
     resultado = []
