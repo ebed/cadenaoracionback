@@ -2,7 +2,7 @@ class MensajeriaController < ApplicationController
 
   def create
     ap "Creando"
-    mensaje = Mensaje.new(encabezado: params[:encabezado], contenido: params[:detalle], usuario_id: params[:usuario_id], peticion_id: params[:peticion_id])
+    mensaje = Mensaje.new(encabezado: params[:encabezado], contenido: params[:contenido], usuario_id: params[:usuario_id], peticion_id: params[:peticion_id])
     if mensaje.save
       render json: {status: 200, resultado: mensaje}
     else

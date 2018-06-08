@@ -32,7 +32,7 @@ class Peticion < ApplicationRecord
         listado=listado.where(estado_id: 1).joins(:intercesors).where(intercesors: {usuario_id: options[:usuario_id]})
       end
      
-      listado=listado.where(usuario_id: options[:usuario_id]).where('estado_id in (1,2)') if options[:usuario_id].present? &&  options[:tipo] == 'peticiones'
+      listado=listado.where(usuario_id: options[:usuario_id]).where('estado_id in (1)') if options[:usuario_id].present? &&  options[:tipo] == 'peticiones'
     end
     
     resultado = []
