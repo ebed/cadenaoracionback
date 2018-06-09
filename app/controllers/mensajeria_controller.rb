@@ -18,12 +18,22 @@ class MensajeriaController < ApplicationController
         end
       end
 
-    else
-      mensaje = Mensaje.new(encabezado: params[:encabezado], contenido: params[:contenido], usuario_id: params[:usuario_id], peticion_id: peticion.id, destinatario_id: peticion.usuario_id)
+    else if params[:tipo] === 'respuesta'
+
+      mensaje = Mensaje.new(encabezado: params[:encabezado], contenido: params[:contenido], usuario_id: params[:usuario_id], peticion_id: peticion.id, destinatario_id: params[:destinatario_id])
       if mensaje.save
         render json: {status: 200, resultado: mensaje}
       else
         render json: {status: 500, resultado: mensaje.errors}
+      end
+
+      else
+        mensaje = Mensaje.new(encabezado: params[:encabezado], contenido: params[:contenido], usuario_id: params[:usuario_id], peticion_id: peticion.id, destinatario_id: peticion.usuario_id)
+        if mensaje.save
+          render json: {status: 200, resultado: mensaje}
+        else
+          render json: {status: 500, resultado: mensaje.errors}
+        end
       end
     end
   end
@@ -31,9 +41,39 @@ class MensajeriaController < ApplicationController
   def show
     ap "Listar" 
     ap params[:tipo]
+
+    render json:  Mensaje.listarPeticion( params[:usuario_id]) if params[:tipo] =='peticiones'
     render json:  Mensaje.where(usuario_id: params[:usuario_id]).order(created_at: :desc) if params[:tipo] =='enviados'
-    render json:  Mensaje.where(destinatario_id:  params[:usuario_id]).order(created_at: :desc) if params[:tipo] =='recibidos'
+    render json:  Mensaje.listarRecibidos( params[:usuario_id]) if params[:tipo] =='recibidos'
+    render json:  Mensaje.listarMensajesPeticion( params[:peticion_id]) if params[:tipo] =='listadoMensajesPeticion'
+
+    
   end
 
 
+  def destroy
+    ap "Eliminacion"
+    mensaje = Mensaje.find(params[:id])
+    if mensaje.delete 
+      render json: {status: 200, mensaje: "Eliminacion exitosa"}
+    else
+      render json: {status: 500, mensaje: "Problemas borrando"}
+    end
+  end
+
+  def update
+    ap "Actualizar"
+    mensaje = Mensaje.find(params[:id])
+    mensaje.estado = true if params[:accion] == "leer"
+    mensaje.estado = false if params[:accion] == "noleido"
+
+    ap mensaje 
+
+    if mensaje.save
+      render json: {status: 200, mensaje: "Mensaje actualizado"}
+
+    else
+      render json: {status: 500, mensaje: "Problemas actualizando mensaje"}
+    end
+  end
 end
