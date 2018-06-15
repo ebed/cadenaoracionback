@@ -38,6 +38,7 @@ class Mensaje < ApplicationRecord
         encabezado: mensaje.encabezado,
         contenido: mensaje.contenido,
         peticion_id: mensaje.peticion_id,
+        usuario: mensaje.usuario.username,
         usuario_id: mensaje.usuario_id,
         peticion: mensaje.peticion.titulo,
         fecha: mensaje.created_at,
