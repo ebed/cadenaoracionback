@@ -7,7 +7,7 @@ class Mensaje < ApplicationRecord
     mensajes = Mensaje.where(destinatario_id: usuario_id).order(:estado).order(created_at: :desc)
 
     mensajes.each do |mensaje|
-
+ 
       temp = {
         id: mensaje.id,
         encabezado: mensaje.encabezado,
@@ -29,7 +29,7 @@ class Mensaje < ApplicationRecord
 
   def self.listarMensajesPeticion(peticion_id)
     resultado = []
-    mensajes = Mensaje.where(peticion_id: peticion_id).order(:estado).order(created_at: :desc)
+    mensajes = Mensaje.where(peticion_id: peticion_id).order(created_at: :desc)
 
     mensajes.each do |mensaje|
 
